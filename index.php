@@ -5,18 +5,17 @@ declare(strict_types=1);
 class Movie
 {
     public string $title;
-    public string $year;
-    public array $genre;
-    public string $director;
-    public array $cast;
+    public array $genres;
+    public int $year;
+    public string $trama;
 
-    function __construct(string $_title, string $_year, array $_genre, string $_director, array $_cast)
+
+    function __construct(string $title, int $year, string $trama, array|string $genres)
     {
-        $this->title = $_title;
-        $this->year = $_year;
-        $this->genre = $_genre;
-        $this->director = $_director;
-        $this->cast = $_cast;
+        $this->title = $title;
+        $this->year = $year;
+        $this->trama = $trama;
+        $this->genres = [$genres];
     }
 
     public function getInfo(): array
@@ -24,9 +23,26 @@ class Movie
         return [
             'title' => $this->title,
             'year' => $this->year,
-            'genre' => $this->genre,
-            'director' => $this->director,
-            'cast' => $this->cast
+            'trama' => $this->trama
         ];
     }
 }
+
+class Genre
+{
+    public string $name;
+
+    function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+}
+
+$movie1 = new Movie('Pulp Fiction', 1994, 'Trama di Pulp Fiction', 'Thriller');
+$movie2 = new Movie('The Shawshank Redemption', 1994, 'Trama di The Shawshank Redemption',  ['Thriller', 'Drama']);
+
+var_dump($movie1->getInfo());
+var_dump($movie1);
+
+var_dump($movie2->getInfo());
+var_dump($movie2);
