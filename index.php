@@ -25,8 +25,9 @@ require_once './db.php';
         <div class="row">
             <?php
             foreach ($movies as $movie) {
-                $movieInfo = $movie->getInfo();
-                $movieGenres = $movie->getGenres();
+                //$movie = object
+                $movieInfo = $movie->getInfo(); //array
+                $movieGenres = $movieInfo['genres'];
 
             ?>
                 <div class="col-4">

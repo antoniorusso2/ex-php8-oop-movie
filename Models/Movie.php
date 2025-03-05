@@ -37,7 +37,7 @@ class Movie
             'title' => $this->title,
             'year' => $this->year,
             'trama' => $this->trama,
-            'genres' => $this->genre
+            'genres' => $this->getGenres(),
         ];
     }
 }
