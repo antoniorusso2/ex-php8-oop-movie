@@ -28,6 +28,7 @@ require_once './db.php';
                 //$movie = object
                 $movieInfo = $movie->getInfo(); //array
                 $movieGenres = $movieInfo['genres'];
+                // var_dump($movieInfo);
 
             ?>
                 <div class="col-4">

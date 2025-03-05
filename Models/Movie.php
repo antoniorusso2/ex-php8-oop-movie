@@ -1,6 +1,10 @@
 <?php
+
+require_once './Traits/TitleFormatter.php';
 class Movie
 {
+    use TitleFormatter;
+
     public string $title;
     protected Genre|array $genre;
     public int $year;
@@ -10,6 +14,7 @@ class Movie
     function __construct(string $title, int $year, string $trama, Genre|array $genre)
     {
         $this->title = $title;
+        $this->formatTitle();
         $this->year = $year;
         $this->trama = $trama;
         $this->genre = $genre;
