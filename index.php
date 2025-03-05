@@ -1,48 +1,66 @@
 <?php
 //controllo tipo di dati
-declare(strict_types=1);
+require_once './db.php';
 
-class Movie
-{
-    public string $title;
-    public array $genres;
-    public int $year;
-    public string $trama;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Films</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">Films</h1>
+            </div>
+        </div>
+        <div class="row">
+            <?php
+            foreach ($movies as $movie) {
+                $movieInfo = $movie->getInfo();
+                $movieGenres = $movie->getGenres();
+
+            ?>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $movieInfo['title'] ?></h5>
+                            <p class="card-text"><?= $movieInfo['trama'] ?></p>
+                            <p class="card-text">Anno: <?= $movieInfo['year'] ?></p>
+                            <p class="card-text">Generi:</p>
+                            <ul>
+                                <?php
+                                foreach ($movieGenres as $genre) {
+
+                                ?>
+                                    <li><?= $genre['name'] ?></li>
+
+                                <?php
+                                }
+                                ?>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <?php
+
+            }
+            ?>
 
 
-    function __construct(string $title, int $year, string $trama, array|string $genres)
-    {
-        $this->title = $title;
-        $this->year = $year;
-        $this->trama = $trama;
-        $this->genres = [$genres];
-    }
+        </div>
 
-    public function getInfo(): array
-    {
-        return [
-            'title' => $this->title,
-            'year' => $this->year,
-            'trama' => $this->trama
-        ];
-    }
-}
+    </div>
 
-class Genre
-{
-    public string $name;
+</body>
 
-    function __construct(string $name)
-    {
-        $this->name = $name;
-    }
-}
-
-$movie1 = new Movie('Pulp Fiction', 1994, 'Trama di Pulp Fiction', 'Thriller');
-$movie2 = new Movie('The Shawshank Redemption', 1994, 'Trama di The Shawshank Redemption',  ['Thriller', 'Drama']);
-
-var_dump($movie1->getInfo());
-var_dump($movie1);
-
-var_dump($movie2->getInfo());
-var_dump($movie2);
+</html>
